@@ -12,8 +12,41 @@ class App extends Component {
   }
 
   render() {
-    return <div>{this.state.data && JSON.stringify(this.state.data)}</div>;
+    return (
+      <div>
+        {this.state.data && this.state.data.results.map(
+          user => 
+          <Users user = {user} />
+        )}
+      </div>
+    )
   }
 }
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+const Users = ({ user }) => (
+  <div>
+  <br/>
+    <div>  
+      <img src={user.picture.thumbnail} />
+    </div>
+    <br/>
+    <div>
+      {user.name.first.charAt(0).toUpperCase() +
+       user.name.first.slice(1) + 
+       (' ') + 
+        user.name.last.charAt(0).toUpperCase() + 
+        user.name.last.slice(1)}
+    </div>
+    <div>
+      {user.email}
+    </div>
+    <hr/>
+  </div>
+)
 
 export default App;
